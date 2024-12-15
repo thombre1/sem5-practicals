@@ -1,0 +1,383 @@
+// 1. Binary Search using Divide and Conquer
+#include <iostream>
+using namespace std;
+
+int binarySearch(int arr[], int low, int high, int key) {
+    if (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == key)
+            return mid;
+        else if (arr[mid] > key)
+            return binarySearch(arr, low, mid - 1, key);
+        else
+            return binarySearch(arr, mid + 1, high, key);
+    }
+    return -1;
+}
+
+int main() {
+    int arr[] = {2, 3, 4, 10, 40};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int key = 10;
+    int result = binarySearch(arr, 0, n - 1, key);
+    (result == -1) ? cout << "Element not found" : cout << "Element found at index " << result;
+    return 0;
+}
+
+// 2. Merge Sort
+#include <iostream>
+using namespace std;
+
+void merge(int arr[], int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
+    int L[n1], R[n2];
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (int i = 0; i < n2; i++)
+        R[i] = arr[m + 1 + i];
+    int i = 0, j = 0, k = l;
+    while (i < n1 && j < n2)
+        arr[k++] = (L[i] <= R[j]) ? L[i++] : R[j++];
+    while (i < n1)
+        arr[k++] = L[i++];
+    while (j < n2)
+        arr[k++] = R[j++];
+}
+
+void mergeSort(int arr[], int l, int r) {
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+
+int main() {
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    mergeSort(arr, 0, n - 1);
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    return 0;
+}
+
+// 3. Quick Sort
+#include <iostream>
+using namespace std;
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
+}
+
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int main() {
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    quickSort(arr, 0, n - 1);
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    return 0;
+}
+
+// 4. 0/1 Knapsack Problem
+#include <iostream>
+using namespace std;
+
+int knapSack(int W, int wt[], int val[], int n) {
+    int K[n + 1][W + 1];
+    for (int i = 0; i <= n; i++) {
+        for (int w = 0; w <= W; w++) {
+            if (i == 0 || w == 0)
+                K[i][w] = 0;
+            else if (wt[i - 1] <= w)
+                K[i][w] = max(val[i - 1] + K[i - 1][w - wt[i - 1]], K[i - 1][w]);
+            else
+                K[i][w] = K[i - 1][w];
+        }
+    }
+    return K[n][W];
+}
+
+int main() {
+    int val[] = {60, 100, 120};
+    int wt[] = {10, 20, 30};
+    int W = 50;
+    int n = sizeof(val) / sizeof(val[0]);
+    cout << "Maximum value: " << knapSack(W, wt, val, n);
+    return 0;
+}
+
+// 5. Minimum Spanning Tree (Prim's Algorithm)
+#include <iostream>
+#include <climits>
+using namespace std;
+
+int minKey(int key[], bool mstSet[], int V) {
+    int min = INT_MAX, min_index;
+    for (int v = 0; v < V; v++)
+        if (!mstSet[v] && key[v] < min)
+            min = key[v], min_index = v;
+    return min_index;
+}
+
+void primMST(int graph[5][5], int V) {
+    int parent[V], key[V];
+    bool mstSet[V] = {false};
+    fill(key, key + V, INT_MAX);
+    key[0] = 0;
+    parent[0] = -1;
+
+    for (int count = 0; count < V - 1; count++) {
+        int u = minKey(key, mstSet, V);
+        mstSet[u] = true;
+        for (int v = 0; v < V; v++)
+            if (graph[u][v] && !mstSet[v] && graph[u][v] < key[v])
+                parent[v] = u, key[v] = graph[u][v];
+    }
+
+    for (int i = 1; i < V; i++)
+        cout << parent[i] << " - " << i << "\t" << graph[i][parent[i]] << "\n";
+}
+
+int main() {
+    int graph[5][5] = {{0, 2, 0, 6, 0},
+                       {2, 0, 3, 8, 5},
+                       {0, 3, 0, 0, 7},
+                       {6, 8, 0, 0, 9},
+                       {0, 5, 7, 9, 0}};
+    primMST(graph, 5);
+    return 0;
+}
+
+// 6. Huffman Coding
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    char data;
+    unsigned freq;
+    Node *left, *right;
+
+    Node(char data, unsigned freq) : data(data), freq(freq), left(nullptr), right(nullptr) {}
+};
+
+struct compare {
+    bool operator()(Node* l, Node* r) { return (l->freq > r->freq); }
+};
+
+void printCodes(struct Node* root, string str) {
+    if (!root)
+        return;
+    if (root->data != '$')
+        cout << root->data << ": " << str << "\n";
+    printCodes(root->left, str + "0");
+    printCodes(root->right, str + "1");
+}
+
+void huffmanCodes(char data[], int freq[], int size) {
+    priority_queue<Node*, vector<Node*>, compare> minHeap;
+    for (int i = 0; i < size; i++)
+        minHeap.push(new Node(data[i], freq[i]));
+    while (minHeap.size() != 1) {
+        Node *left = minHeap.top(); minHeap.pop();
+        Node *right = minHeap.top(); minHeap.pop();
+        Node *top = new Node('$', left->freq + right->freq);
+        top->left = left; top->right = right;
+        minHeap.push(top);
+    }
+    printCodes(minHeap.top(), "");
+}
+
+int main() {
+    char arr[] = {'a', 'b', 'c', 'd', 'e', 'f'};
+    int freq[] = {5, 9, 12, 13, 16, 45};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    huffmanCodes(arr, freq, size);
+    return 0;
+}
+
+// 7. Dijkstra's Algorithm
+#include <iostream>
+#include <climits>
+using namespace std;
+
+int minDistance(int dist[], bool sptSet[], int V) {
+    int min = INT_MAX, min_index;
+    for (int v = 0; v < V; v++)
+        if (!sptSet[v] && dist[v] <= min)
+            min = dist[v], min_index = v;
+    return min_index;
+}
+
+void dijkstra(int graph[9][9], int src, int V) {
+    int dist[V];
+    bool sptSet[V] = {false};
+    fill(dist, dist + V, INT_MAX);
+    dist[src] = 0;
+
+    for (int count = 0; count < V - 1; count++) {
+        int u = minDistance(dist, sptSet, V);
+        sptSet[u] = true;
+        for (int v = 0; v < V; v++)
+            if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v])
+                dist[v] = dist[u] + graph[u][v];
+    }
+
+    for (int i = 0; i < V; i++)
+        cout << i << "\t" << dist[i] << "\n";
+}
+
+int main() {
+    int graph[9][9] = { // Add your graph here };
+    dijkstra(graph, 0, 9);
+    return 0;
+}
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+void LCS(string X, string Y) {
+    int m = X.length();
+    int n = Y.length();
+    vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+
+    for (int i = 1; i <= m; i++) {
+        for (int j = 1; j <= n; j++) {
+            if (X[i - 1] == Y[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+            } else {
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+    }
+
+    // Reconstruct LCS
+    string lcs;
+    int i = m, j = n;
+    while (i > 0 && j > 0) {
+        if (X[i - 1] == Y[j - 1]) {
+            lcs = X[i - 1] + lcs;
+            i--;
+            j--;
+        } else if (dp[i - 1][j] > dp[i][j - 1]) {
+            i--;
+        } else {
+            j--;
+        }
+    }
+
+    cout << "Length of LCS: " << dp[m][n] << endl;
+    cout << "LCS: " << lcs << endl;
+}
+
+int main() {
+    string X = "AGGTAB";
+    string Y = "GXTXAYB";
+    LCS(X, Y);
+    return 0;
+}
+
+#include <iostream>
+#include <vector>
+#include <climits>
+
+using namespace std;
+
+void bellmanFord(int V, int E, vector<vector<int>> &edges, int src) {
+    vector<int> dist(V, INT_MAX);
+    dist[src] = 0;
+
+    for (int i = 1; i < V; i++) {
+        for (auto &edge : edges) {
+            int u = edge[0], v = edge[1], w = edge[2];
+            if (dist[u] != INT_MAX && dist[u] + w < dist[v]) {
+                dist[v] = dist[u] + w;
+            }
+        }
+    }
+
+    // Check for negative weight cycle
+    for (auto &edge : edges) {
+        int u = edge[0], v = edge[1], w = edge[2];
+        if (dist[u] != INT_MAX && dist[u] + w < dist[v]) {
+            cout << "Graph contains a negative weight cycle" << endl;
+            return;
+        }
+    }
+
+    cout << "Vertex distances from source " << src << ":" << endl;
+    for (int i = 0; i < V; i++) {
+        cout << "Vertex " << i << ": " << dist[i] << endl;
+    }
+}
+
+int main() {
+    int V = 5, E = 8;
+    vector<vector<int>> edges = {
+        {0, 1, -1}, {0, 2, 4}, {1, 2, 3}, {1, 3, 2}, {1, 4, 2},
+        {3, 2, 5}, {3, 1, 1}, {4, 3, -3}};
+    bellmanFord(V, E, edges, 0);
+    return 0;
+}
+#include <iostream>
+#include <vector>
+#include <climits>
+
+using namespace std;
+
+void floydWarshall(int V, vector<vector<int>> &graph) {
+    vector<vector<int>> dist = graph;
+
+    for (int k = 0; k < V; k++) {
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                if (dist[i][k] != INT_MAX && dist[k][j] != INT_MAX 
+                    && dist[i][k] + dist[k][j] < dist[i][j]) {
+                    dist[i][j] = dist[i][k] + dist[k][j];
+                }
+            }
+        }
+    }
+
+    cout << "All-Pairs Shortest Path Matrix:" << endl;
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            if (dist[i][j] == INT_MAX)
+                cout << "INF ";
+            else
+                cout << dist[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+    vector<vector<int>> graph = {
+        {0, 3, INT_MAX, INT_MAX},
+        {2, 0, INT_MAX, INT_MAX},
+        {INT_MAX, 7, 0, 1},
+        {6, INT_MAX, INT_MAX, 0}};
+    floydWarshall(4, graph);
+    return 0;
+}
