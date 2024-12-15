@@ -1,0 +1,260 @@
+MAIN PAGE
+<!DOCTYPE html>
+<html>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial;
+        padding: 10px;
+
+    }
+
+    /* Header/Blog Title */
+    .header {
+        padding: 30px;
+        text-align: center;
+        background: white;
+        border-radius: 20px;
+        border: 1px solid black;
+        background-color: #ffb700;
+    }
+
+    .header h1 {
+        font-size: 50px;
+        border-radius: 20px;
+    }
+
+
+    .topnav {
+        overflow: hidden;
+        background-color: #333;
+        border-radius: 20px;
+    }
+
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    /* Change color on hover */
+    .topnav a:hover {
+        background-color: yellow;
+        color: black;
+    }
+
+    .leftcolumn {
+        float: left;
+        width: 75%;
+        border-radius: 20px;
+
+    }
+
+
+    .fakeimg {
+        background-image: url("///");
+        background-repeat: no-repeat;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .fakeimg2 {
+        background-image: url("///");
+        background-repeat: no-repeat;
+        width: 100%;
+        padding: 20px;
+    }
+
+  
+    .card {
+        border: 5px solid black;
+        background-color: #ffb700;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 20px;
+
+    }
+
+ 
+    .row::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    
+    .footer {
+        padding: 20px;
+        text-align: center;
+        background: #ddd;
+        margin-top: 20px;
+        border-radius: 20px;
+        border: 3px solid black;
+        background-color: #ffb700;
+    }
+
+    @media screen and (max-width: 800px) {
+        .leftcolumn, .rightcolumn {
+            width: 100%;
+            padding: 0;
+        }
+    }
+
+    @media screen and (max-width: 400px) {
+        .topnav a {
+            float: none;
+            width: 100%;
+        }
+    }
+</style>
+<head>
+</head>
+<body background="Designer.png">
+
+<div class="header">
+    <h1>MangoEats</h1>
+    <p>Mango is a experience</p>
+</div>
+
+<div class="topnav">
+    <a href="PS41.html">Order</a>
+    <a href="PS42.html">About</a>
+</div>
+
+<div class="row">
+    <div class="leftcolumn">
+        <div class="card">
+            <h2>New Seasons New Mango</h2>
+
+            <div class="fakeimg" style="height:200px;"></div>
+
+            <p>The peak mango season runs from May through September, although imported mangoes are available
+                year-round. These delicious fruits are not only tasty but also nutritious, providing vitamins A and C,
+                potassium, and antioxidants1. So, if you are craving mangoes nows the perfect time to enjoy them</p>
+        </div>
+        <div class="card">
+            <h2>Things you dont know about Mango</h2>
+
+            <div class="fakeimg2" style="height:200px;"></div>
+
+            <p>India holds the title of the Mango Capital of the World It leads in mango production, followed by China,
+                Thailand, and Indonesia. Interestingly, India consumes most of its own mangoes, accounting for less than
+                1% of international trade</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <h2>Courtesy of GCOEN 2024</h2>
+</div>
+
+</body>
+</html>
+
+
+PLACE ORDER PAGE
+
+<html>
+<head>
+    <title>Place your Order</title>
+    <style>
+        div {
+            align-content: center;
+            padding: 30px;
+            background-color: white;
+            width: 400px;
+            height: 450px;
+            border-radius: 10px;
+
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffb700;
+        }
+
+        input[type=text], input[type=submit], input[type=email] {
+            border: none;
+            border-bottom: 2px solid #ffb700;
+            width: 100%;
+            padding: 10px;
+        }
+
+        h1 {
+            color: black;
+            text-shadow: 0 0 25px #ffb700;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <h1>Place your order here</h1>
+    <form>
+        <input type="text" id="Name" name="Name" placeholder="Name"> <br><br>
+        <input type="email" id="mail" name="mail" placeholder="@mail.com"> <br><br>
+        <input type="text" id="address" name="address" placeholder="Address"> <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</html>
+
+
+ABOUT US 
+
+<html>
+<head>
+    <title>About us</title>
+    <style>
+        p {
+            text-align: center;
+            color: #ffb700;
+            font-size: 40px;
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        div {
+            width: 70%;
+            height: 35%;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+
+
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+
+
+        }
+
+    </style>
+</head>
+<body background="Designer (1).png">
+<div>
+    <p>"Its all about mangoes and we only talk about mangoes"<br>
+        Contact us on MangoEats@Tree.com<br>
+        Or +75 52015 20146
+        <br>Website Created with help of GCOEN Students
+        <br>Visit us more and more
+
+    </p>
+</div>
+</body>
+</html>

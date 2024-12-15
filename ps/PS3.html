@@ -1,0 +1,81 @@
+HTML
+
+<html>
+<head>
+    <link rel="stylesheet" href="PS3.css">
+    <title>Fresher's Party</title>
+</head>
+<body>
+
+<div>
+    <form>
+        <h1 align="center">Fresher's Party</h1>
+        <input type="text" id="fname" name="fname" placeholder="First Name"><br><br>
+
+        <input type="text" id="lname" name="lname" placeholder="Last Name"><br><br>
+        <label id="gender">Gender:</label>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label>
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label><br>
+        <br>
+        <select id="Branch" name="Branch" class="form">
+            <option value="None">Branch</option>
+            <option value="CSE">Computer Science and Engg</option>
+            <option value="ETC">Electronics and telecommunication</option>
+            <option value="EE">Electrical Engg</option>
+            <option value="ME">Mechanical Engg</option>
+            <option value="CE">Civil Engg</option>
+
+        </select>
+        <br>
+        <br>
+
+        <input type="number" id="Passout" name="age" placeholder=" Passout Year" min="2025" max="2029" class="form"><br><br>
+
+        <input type="tel" class="form" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Enter Whatsapp number">
+        <br>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+</body>
+</html>
+
+CSS
+
+div {
+    align-content: center;
+    padding: 30px;
+    background-color: white;
+    width: 400px;
+    height: 450px;
+    border-radius: 10px;
+
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+}
+
+input[type=text], input[type=submit], .form {
+    border: none;
+    border-bottom: 2px solid red;
+    width: 100%;
+    padding: 10px;
+}
+
+input[type="radio"]:checked {
+    background-color: #0074D9; /* Change to your desired color */
+    border-color: #0074D9;
+}
+
+h1 {
+    color: red;
+    text-shadow: 0 0 25px black;
+}

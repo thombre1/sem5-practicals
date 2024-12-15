@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>JS programme</title>
+    <style>
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 8em;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <p id="box"></p>
+</div>
+<script>
+    const box = document.getElementById('box');
+    var size = 5
+    var growing = true;
+
+
+    function Adjustfontsize() {
+        if (growing) {
+            box.textContent = 'Text Growing'
+            box.style.color = 'red'
+            size += 1;
+            box.style.fontSize = size + 'px';
+            if (size > 50) growing = false;
+        } else {
+            box.textContent = 'Text Shrinking'
+            box.style.color = 'blue'
+            size -= 1;
+            box.style.fontSize = size + 'px';
+            if (size == 5) growing = true;
+        }
+    }
+
+    setInterval(Adjustfontsize, 100);
+</script>
+</body>
+</html>

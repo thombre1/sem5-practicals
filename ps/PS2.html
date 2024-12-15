@@ -1,0 +1,79 @@
+HTML
+
+<html>
+<head>
+    <link rel="stylesheet" href="PS2.css">
+    <title>Exam Time Table</title>
+</head>
+<body>
+<div align="center">
+
+    <table cellpadding="5px">
+        <tr class="b">
+            <th colspan="4">Exam Time Table
+        </tr>
+        <tr class="b">
+            <th rowspan="2">Date
+            <th colspan="3">Time
+
+        <tr class="b">
+            <td>3 PM
+            <td>4 PM
+            <td width="60px">5 PM
+
+        <tr class="b">
+            <td>17/6/2024
+            <td colspan="3" class="Red">Mathematics
+
+        <tr class="b">
+            <td>19/6/2024
+            <td colspan="3" class="Red">Physics
+
+        <tr class="b">
+            <td>21/6/2024
+            <td colspan="2" class="blue">Communication Skill
+
+        <tr class="b">
+            <td>24/6/2024
+            <td colspan="2" class="yellow">Engineering Drawing
+
+    </table>
+    <footer>*****
+        <br> Red:Room M23,Blue:Room M123,Yellow:Room M112
+        <br> All the Best Students
+
+    </footer>
+</div>
+</body>
+</html>
+
+CSS
+
+.Red{
+    background-color: red;
+}
+.blue{
+    background-color: deepskyblue;
+}
+.yellow{
+    background-color: yellow;
+}
+table{
+    border:1px solid black ;
+    background: black;
+
+}
+td,th{
+    border: 1px dashed black;
+}
+.b{
+
+    padding-right: 10px;
+    background-color: white;
+
+}
+.b:hover{
+    color: blue;
+    font-weight: bolder;
+    text-decoration: underline;
+}

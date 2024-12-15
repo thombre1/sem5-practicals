@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input[type="text"] {
+            padding: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+        .search-bar button {
+            padding: 5px 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #5cb85c;
+            color: #fff;
+            cursor: pointer;
+        }
+        .search-bar button:hover {
+            background-color: #4cae4c;
+        }
+        .content {
+            padding: 20px;
+        }
+        .car-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .car-list li {
+            background-color: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .search-results {
+            background-color: #e0e0e0;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function searchCars() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let carList = document.querySelector('.car-list');
+            let carItems = document.querySelectorAll('.car-list li');
+            let results = [];
+
+            carItems.forEach(car => {
+                if (car.innerText.toLowerCase().includes(input)) {
+                    results.push(car.innerText);
+                }
+            });
+
+            if (results.length) {
+                carList.style.display = 'none';
+            } else {
+                carList.style.display = 'block';
+            }
+
+            let resultDiv = document.getElementById('searchResults');
+            resultDiv.innerHTML = results.length ? results.join('<br>') : 'No results found';
+        }
+    </script>
+</head>
+<body background="///">
+<div class="header">
+    <div>My Website</div>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search...">
+        <button type="button" onclick="searchCars()">Search</button>
+    </div>
+</div>
+<div class="content">
+    <h2 style="color: red;background-color:white" >List of Cars</h2>
+    <ul class="car-list">
+        <li>Ford Mustang</li>
+        <li>Chevrolet Camaro</li>
+        <li>Tesla Model S</li>
+        <li>BMW 3 Series</li>
+        <li>Audi A4</li>
+        <li>Ford raptor</li>
+    </ul>
+    <div id="searchResults" class="search-results"></div>
+</div>
+</body>
+</html>
